@@ -156,6 +156,13 @@ struct IdentifyDUT {
     uint8_t             cns;    // The Identify.DW10.CNS field
     vector<uint8_t>     raw;    // Raw identify data payload to compare against
     vector<uint8_t>     mask;   // Mask set bits indicate raw[x] bits to compare
+
+    void reset() {
+        nsid = 0;
+        cns = 0;
+        raw.clear();
+        mask.clear();
+    }
 };
 
 struct Golden {

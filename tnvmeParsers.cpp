@@ -330,7 +330,7 @@ ParseGoldenCmdLine(Golden &golden, const char *optarg)
             return false;
 
         while (SeekSpecificXMLNode(xmlFile, "cmd", 1, nodeVal, attr)) {
-            memset(&cmd, 0, sizeof(cmd));
+            cmd.reset();
 
             if (SeekSpecificXMLNode(xmlFile, "dw1", 2, nodeVal, attr)) {
                 // Seek for value elements defining the cmd's params

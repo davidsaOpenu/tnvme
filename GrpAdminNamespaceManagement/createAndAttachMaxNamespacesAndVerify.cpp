@@ -121,8 +121,6 @@ CreateAndAttachMaxNamespacesAndVerify::RunCoreTest()
 	//uint32_t memAlignment = sysconf(_SC_PAGESIZE);
 	//CEStat retStat;
 	send_64b_bitmask prpBitmask = (send_64b_bitmask) (MASK_PRP1_PAGE | MASK_PRP2_PAGE);
-	uint8_t userBuffer[4096];
-    if (userBuffer == 0){} // Suppress unused variable warning
 
     const uint32_t *namespaceIdListBuffer32BitPtr = NULL;
     const uint16_t *controllerIdListBuffer16BitPtr;
@@ -204,6 +202,7 @@ CreateAndAttachMaxNamespacesAndVerify::RunCoreTest()
 
     SharedNamespaceAttachPtr namespaceAttachCmd = SharedNamespaceAttachPtr(new NamespaceAttach() );
     /*
+   	uint8_t userBuffer[4096];
     //BUGBUG APL is returning an improper list (Ctrlr IDs 1/2 wheras they ID themselves as actually 0/1)
     for(uint32_t bufferIndex = 0; bufferIndex < 4096; bufferIndex++) {
     	userBuffer[bufferIndex]=0;

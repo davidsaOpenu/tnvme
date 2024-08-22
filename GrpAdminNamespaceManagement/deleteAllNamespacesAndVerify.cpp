@@ -115,8 +115,7 @@ DeleteAllNamespacesAndVerify::RunCoreTest()
 	//uint32_t memAlignment = sysconf(_SC_PAGESIZE);
 	//CEStat retStat;
 	send_64b_bitmask prpBitmask = (send_64b_bitmask) (MASK_PRP1_PAGE | MASK_PRP2_PAGE);
-	uint8_t userBuffer[4096];
-    if (userBuffer == 0){} // Suppress unused variable warning
+
     const uint8_t *pROPrpBuffer = NULL;
     const uint32_t *namespaceIdListBuffer32BitPtr = NULL;
     const uint16_t *controllerIdListBuffer16BitPtr;
@@ -208,6 +207,7 @@ DeleteAllNamespacesAndVerify::RunCoreTest()
 
 				//BUGBUG The APL firmware isn't reporting back the right controller ID list.. make one with IDs 0/1
 				/*
+				uint8_t userBuffer[4096];
 				LOG_NRM("BUGBUG For APL FW, change the controller list to CTRLIDs 0 and 1, instead of 1 and 2")
 				if( controllerIdListBuffer16BitPtr[0] > 0) {
 					for(uint32_t bufferIndex = 0; bufferIndex < 4096; bufferIndex++) {

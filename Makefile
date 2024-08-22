@@ -119,7 +119,10 @@ $(SUBDIRS):
 	$(MAKE) -C $@ $(GOAL)
 
 $(APP_NAME): $(SUBDIRS) $(SOURCES)
-	$(CC) $(INCLUDES) $(DFLAGS) $(SOURCES) -o $(APP_NAME) $(LDFLAGS) $(CFLAGS)
+	$(CC) $(INCLUDES) $(DFLAGS) $(filter-out tnvme.cpp tnvmeParsers.cpp, $(SOURCES)) -c $(CFLAGS)
+	$(CC) $(INCLUDES) $(DFLAGS) tnvme.cpp tnvmeParsers.cpp -c -Wno-deprecated-declarations $(CFLAGS)
+	$(CC) -o $(APP_NAME) $(filter-out tnvme.cpp tnvmeParsers.cpp, $(SOURCES:.cpp=.o)) \
+	                     tnvme.o tnvmeParsers.o -Wl,--allow-multiple-definition $(LDFLAGS) $(CFLAGS) # TODO: remove multiple-def
 
 # Specify a custom source compile dir: "make src SRCDIR=../compile/dir"
 # If the specified dir could cause recursive copies, then specify w/o './'

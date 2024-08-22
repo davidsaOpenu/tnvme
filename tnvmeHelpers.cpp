@@ -180,7 +180,7 @@ ReportCompareResults(Golden &golden, SharedMemBufferPtr idMem, size_t idCmdNum,
     string lineBuffer = gCmdLine.dump + '/' + golden.outputFile;
     ofstream resultsFile (lineBuffer.c_str());
     char workingCharBuff[80];
-    char hexNotation[3];
+    char hexNotation[4]; // +1 for \0
     size_t misCompOffset;
     int lastProcessed = -1;
     uint16_t LstOffset;
