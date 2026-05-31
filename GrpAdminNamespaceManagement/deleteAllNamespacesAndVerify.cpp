@@ -115,8 +115,6 @@ DeleteAllNamespacesAndVerify::RunCoreTest()
 	//uint32_t memAlignment = sysconf(_SC_PAGESIZE);
 	//CEStat retStat;
 	send_64b_bitmask prpBitmask = (send_64b_bitmask) (MASK_PRP1_PAGE | MASK_PRP2_PAGE);
-	uint8_t userBuffer[4096];
-    if (userBuffer == 0){} // Suppress unused variable warning
     const uint8_t *pROPrpBuffer = NULL;
     const uint32_t *namespaceIdListBuffer32BitPtr = NULL;
     const uint16_t *controllerIdListBuffer16BitPtr;

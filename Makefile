@@ -22,12 +22,13 @@ export CC = g++				# Mods here affect all sub-makes
 export CFLAGS = -O0 -W -Wall -Werror -std=c++0x #mods here affect all sub-makes
 LDFLAGS = $(foreach stem, $(SUBDIRS),./$(stem)/lib$(stem).a)
 INCLUDES = -I./ -I../
+XML_INCLUDES = $(shell pkg-config libxml++-2.6 --cflags --libs)
 
 # Notify the compiler/linker where the Boost library and hdr files are located
 CFLAGS += -lboost_filesystem
-CFLAGS += -lboost_system
+#CFLAGS += -lboost_system
 # Notify the compiler/linker where the XML library and hdr files are located
-CFLAGS += $(shell pkg-config libxml++-2.6 --cflags --libs)
+CFLAGS += $(XML_INCLUDES:-I%=-isystem %)
 
 SUBDIRS:=			\
 	GrpAdminCreateIOQCmd	\

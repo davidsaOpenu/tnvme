@@ -123,30 +123,30 @@ CreateResources_r11::RunCoreTest()
     if (gCtrlrConfig->SetState(ST_ENABLE) == false)
         throw FrmwkEx(HERE);
 
-	uint64_t maxIOQEntries;
-	// Determine the max IOQ entries supported
-	if (gRegisters->Read(CTLSPC_CAP, maxIOQEntries) == false)
-		throw FrmwkEx(HERE, "Unable to determine MQES");
+    uint64_t maxIOQEntries;
+    // Determine the max IOQ entries supported
+    if (gRegisters->Read(CTLSPC_CAP, maxIOQEntries) == false)
+        throw FrmwkEx(HERE, "Unable to determine MQES");
 
-	maxIOQEntries &= CAP_MQES;
-	maxIOQEntries += 1;      // convert to 1-based
-	if (maxIOQEntries < (uint64_t)NumEntriesIOQ) {
-		LOG_NRM("Changing number of Q elements from %d to %lld",
-			NumEntriesIOQ, (unsigned long long)maxIOQEntries);
-		NumEntriesIOQ = maxIOQEntries;
-	}
+    maxIOQEntries &= CAP_MQES;
+    maxIOQEntries += 1;      // convert to 1-based
+    if (maxIOQEntries < (uint64_t)NumEntriesIOQ) {
+        LOG_NRM("Changing number of Q elements from %d to %lld",
+            NumEntriesIOQ, (unsigned long long)maxIOQEntries);
+        NumEntriesIOQ = maxIOQEntries;
+    }
 
-	gCtrlrConfig->SetIOCQES(gInformative->GetIdentifyCmdCtrlr()->
-		GetValue(IDCTRLRCAP_CQES) & 0xf);
-	Queues::CreateIOCQContigToHdw(mGrpName, mTestName,
-		CALC_TIMEOUT_ms(1), asq, acq, IOQ_ID, NumEntriesIOQ, true,
-		IOCQ_GROUP_ID, true, 0);
+    gCtrlrConfig->SetIOCQES(gInformative->GetIdentifyCmdCtrlr()->
+        GetValue(IDCTRLRCAP_CQES) & 0xf);
+    Queues::CreateIOCQContigToHdw(mGrpName, mTestName,
+        CALC_TIMEOUT_ms(1), asq, acq, IOQ_ID, NumEntriesIOQ, true,
+        IOCQ_GROUP_ID, true, 0);
 
-	gCtrlrConfig->SetIOSQES(gInformative->GetIdentifyCmdCtrlr()->
-		GetValue(IDCTRLRCAP_SQES) & 0xf);
-	Queues::CreateIOSQContigToHdw(mGrpName, mTestName,
-		CALC_TIMEOUT_ms(1), asq, acq, IOQ_ID, NumEntriesIOQ, true,
-		IOSQ_GROUP_ID, IOQ_ID, 0);
+    gCtrlrConfig->SetIOSQES(gInformative->GetIdentifyCmdCtrlr()->
+        GetValue(IDCTRLRCAP_SQES) & 0xf);
+    Queues::CreateIOSQContigToHdw(mGrpName, mTestName,
+        CALC_TIMEOUT_ms(1), asq, acq, IOQ_ID, NumEntriesIOQ, true,
+        IOSQ_GROUP_ID, IOQ_ID, 0);
 }
 
 }   // namespace

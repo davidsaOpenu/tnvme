@@ -105,6 +105,7 @@ CreateResources_r11::RunCoreTest()
      * None.
      * \endverbatim
      */
+
     if (gCtrlrConfig->SetState(ST_DISABLE_COMPLETELY) == false)
         throw FrmwkEx(HERE);
 
@@ -120,8 +121,9 @@ CreateResources_r11::RunCoreTest()
     gCtrlrConfig->SetCSS(CtrlrConfig::CSS_NVM_CMDSET);
     gCtrlrConfig->SetIOCQES(CtrlrConfig::MIN_IOCQES);
     gCtrlrConfig->SetIOSQES(CtrlrConfig::MIN_IOSQES);
-    if (gCtrlrConfig->SetState(ST_ENABLE) == false)
+    if (gCtrlrConfig->SetState(ST_ENABLE) == false) {
         throw FrmwkEx(HERE);
+    }
 
 	uint64_t maxIOQEntries;
 	// Determine the max IOQ entries supported

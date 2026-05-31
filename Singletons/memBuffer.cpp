@@ -148,7 +148,7 @@ MemBuffer::InitAlignment(uint32_t bufSize, uint32_t align, bool initMem,
     if (srcBuffer != NULL) {
     	//memcpy(mVirBaseAddr, buffer, bufSize );
         for(uint32_t dataIndex = 0; dataIndex < bufSize; dataIndex++) {
-        	mVirBaseAddr[dataIndex] = (volatile uint8_t) srcBuffer[dataIndex];
+        	mVirBaseAddr[dataIndex] = srcBuffer[dataIndex];
         }
     }
     else if (initMem) {
