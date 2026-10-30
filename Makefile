@@ -26,7 +26,9 @@ XML_INCLUDES = $(shell pkg-config libxml++-2.6 --cflags --libs)
 
 # Notify the compiler/linker where the Boost library and hdr files are located
 CFLAGS += -lboost_filesystem
-#CFLAGS += -lboost_system
+# Boost.System is header-only from Boost 1.69 and has no library from 1.89
+# (Ubuntu 26.04); older Boost (Ubuntu 14.04's 1.54) must still link it
+CFLAGS += $(shell echo 'int main(){}' | $(CC) -x c++ - -o /dev/null -lboost_system 2>/dev/null && echo -lboost_system)
 # Notify the compiler/linker where the XML library and hdr files are located
 CFLAGS += $(XML_INCLUDES:-I%=-isystem %)
 
